@@ -32,7 +32,7 @@
 .task-list .list-blank{
     color: #999;
     line-height: 350px;
-    display: none;
+    /* display: none; */
 }
 /* 状态按钮 */
 

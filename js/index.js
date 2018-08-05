@@ -41,6 +41,6 @@ deleteBtn.forEach((item, index) => {
         taskData.splice(index, 1);
     }
 });
-// taskWrap.innerHTML = "<li>"+taskData[0].msg+"</li>";
-// 使用unshift
 
+// 加判断 如果ul里面有li显示 隐藏 “还没有添加过任务”
+// 页面中添加删除元素 是不是要用节点来控制呢？

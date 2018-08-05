@@ -26,15 +26,10 @@
     </div>
     <!--Todo内容 -->
     <div class="task-edit-box" id="task-edit-box">
-      <a href="#" class="close-box">×</a>
+      <a href="#" class="close-box" id="close-box" onclick="closeWrite()">×</a>
       <h4>Todo内容</h4>
-      <span>主题：</span>
       <input type="text" class="task-title-detail">
-      <br/>
-      <span>内容：</span>
-      <textarea name="" class="task-content-detail" id="" cols="30" rows="10"></textarea>
-      <br>
-      <button>提交</button>
+      <button class="submit-task" onclick="submitCon()">确认</button>
     </div>
     <div class="function-box">
       <ul>

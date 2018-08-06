@@ -1,10 +1,4 @@
-// var taskData = [{
-//     msg: "写代码",
-//     status: "待办"
-// }, {
-//     msg: "写代码2",
-//     status: "待办2"
-// }];
+
 var taskData = new Array();
 var wrap = document.querySelector('.wrap');
 var taskWrap = document.querySelector(".task-list");
@@ -18,18 +12,6 @@ function addTask() {
 function closeWrite() {
     document.getElementById("task-edit-box").style.display = "none";
 }
-// 在ul中遍历数组元素
-// for (var i = 0; i < taskData.length; i++) {
-// const li = document.createElement('li');
-// const span = document.createElement('span');
-// span.className = 'delete-item';
-// span.textContent = '删除';
-
-// li.appendChild(span);
-// console.log(li);
-//     taskWrap.innerHTML += "<li>" + taskData[i] + "<span class='delete-item'>删除</span></li>";
-//     taskWrap.innerHTML += `<li>${taskData[i]}<span class='delete-item'>删除</span><li>`;
-// }
 
 
 // 在页面中显示新添加的数组元素
@@ -47,8 +29,8 @@ function submitCon() {
         itemDelete();
     }
 }
-inputVal.onkeypress = function(){
-    if(event.keyCode == 13){
+inputVal.onkeypress = function () {
+    if (event.keyCode == 13) {
         submitCon();
     }
 }
@@ -63,17 +45,11 @@ function itemDelete() {
             if (r == true) {
                 taskItem[index].remove();
                 taskData.splice(index, 1);
-                if (taskData[0] == undefined) {
+                if (taskData.length == 0) {
                     taskWrap.setAttribute("isNull", "true");
                 }
-            } else {
-                console.log("未删除")
             }
         }
     });
 }
 itemDelete();
-
-
-// 加判断 如果ul里面有li显示 隐藏 “还没有添加过任务”
-// 页面中添加删除元素 是不是要用节点来控制呢？

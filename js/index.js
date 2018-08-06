@@ -1,4 +1,62 @@
+var task = new Array();
+var task_edit = document.querySelector("#task-edit-box");
+var task_input = document.querySelector(".task-title-detail");
+var task_wrap = document.querySelector(".task-list");
+var submitBtn = document.querySelector(".submit-task");
+var addTask = document.querySelector(".addTask");
+var close_box = document.querySelector(".close-box");
 
+
+const modal = {
+    show: function () {
+        task_edit.style.display = "block";
+        task_input.focus();
+        task_input.value = "";
+    },
+    close: function () {
+        task_edit.style.display = "none";
+        task_input.value = "";
+    }
+}
+
+// show modal
+addTask.onclick = function () {
+    modal.show();
+}
+
+// close modal
+close_box.onclick = function () {
+    modal.close();
+}
+
+// submit content
+submitBtn.onclick = function () {
+    if (!task_input.value) {
+        alert("至少要输入一个字符");
+        modal.close();
+        return;
+    }
+
+    // generate array
+    task.unshift({ taskname: task_input.value, type: 'uncompleted' });
+
+    task.forEach((taskItem) => {
+        // 1. create
+        var li = document.createElement("li");
+        var span = document.createElement("span");
+
+        // 2. render
+        span.className = 'delete-item';
+        span.textContent = '删除';
+        li.textContent = taskItem.taskname;
+        li.appendChild(span);
+        task_wrap.appendChild(li);
+    });
+    modal.close();
+}
+
+
+/*
 var taskData = new Array();
 var wrap = document.querySelector('.wrap');
 var taskWrap = document.querySelector(".task-list");
@@ -53,3 +111,5 @@ function itemDelete() {
     });
 }
 itemDelete();
+
+*/

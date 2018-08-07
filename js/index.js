@@ -5,7 +5,7 @@ var task_wrap = document.querySelector(".task-list");
 var submitBtn = document.querySelector(".submit-task");
 var addTask = document.querySelector(".addTask");
 var close_box = document.querySelector(".close-box");
-
+var list_blank = document.querySelector(".list-blank");
 
 const modal = {
     show: function () {
@@ -29,87 +29,76 @@ close_box.onclick = function () {
     modal.close();
 }
 
+// 判断ul里面是否有内容
+function isDisplay() {
+    if (task_wrap.contains(task_wrap.querySelector('li'))) {
+        list_blank.textContent = "您还有" + (task_wrap.childNodes.length - 1) + "个待办任务";
+    } else {
+        list_blank.textContent = "还没有添加过任务…";
+    }
+}
+
 // submit content
-submitBtn.onclick = function () {
+const submitTask = function () {
     if (!task_input.value) {
         alert("至少要输入一个字符");
-        modal.close();
+        task_input.value = "";
+        task_input.focus();
+        // modal.close();
         return;
     }
 
-    // generate array
+    // 1. 创建虚拟 DOM
+    const li = document.createElement('li');
+    const span = document.createElement('span');
+    span.className = 'delete-item';
+    span.textContent = '删除';
+
+    // 2. 生成数组
     task.unshift({ taskname: task_input.value, type: 'uncompleted' });
 
-    task.forEach((taskItem) => {
-        // 1. create
-        var li = document.createElement("li");
-        var span = document.createElement("span");
+    // 3. 把数组中的第一个元素渲染到创建的虚拟 DOM 中
+    li.textContent = task[0].taskname;
+    li.appendChild(span);
 
-        // 2. render
-        span.className = 'delete-item';
-        span.textContent = '删除';
-        li.textContent = taskItem.taskname;
-        li.appendChild(span);
-        task_wrap.appendChild(li);
-    });
+    // 4. 把虚拟 DOM 渲染到页面结构中
+    task_wrap.insertBefore(li, task_wrap.childNodes[0]);
+
+    // 判断是否删除
+    isDisplay();
+    // 添加成功后，关闭 modal
     modal.close();
+    itemDelete();
 }
 
-
-/*
-var taskData = new Array();
-var wrap = document.querySelector('.wrap');
-var taskWrap = document.querySelector(".task-list");
-
-// 点击添加，弹出输入框
-function addTask() {
-    wrap.querySelector("#task-edit-box").style.display = "block";
-    document.querySelector(".task-title-detail").focus();
-}
-// 关闭输入框
-function closeWrite() {
-    document.getElementById("task-edit-box").style.display = "none";
+// submit content
+submitBtn.onclick = function () {
+    submitTask();
 }
 
-
-// 在页面中显示新添加的数组元素
-var inputVal = document.querySelector(".task-title-detail");
-function submitCon() {
-    if (!inputVal.value) {
-        alert("不能为空");
-        closeWrite();
-    } else {
-        taskData.unshift(inputVal.value);
-        document.querySelector(".task-title-detail").value = "";
-        document.getElementById("task-edit-box").style.display = "none";
-        taskWrap.innerHTML += "<li>" + taskData[0] + "<span class='delete-item'>删除</span></li>";
-        taskWrap.setAttribute("isNull", "false");
-        itemDelete();
-    }
-}
-inputVal.onkeypress = function () {
+// 按 ENTER 键提交
+task_input.onkeypress = function () {
     if (event.keyCode == 13) {
-        submitCon();
+        submitTask();
     }
 }
 
-// 在页面中不显示 删除对应数组中的元素
+// 删除功能
+
+// 点击删除的时候，页面中删除，数组中不删除
 function itemDelete() {
-    var taskItem = document.querySelectorAll(".task-list li");
+    // var taskItem = document.querySelectorAll(".task-list li");
     var deleteBtn = document.querySelectorAll(".delete-item");
     deleteBtn.forEach((item, index) => {
         item.onclick = function () {
-            var r = confirm("确定要删除吗")
-            if (r == true) {
-                taskItem[index].remove();
-                taskData.splice(index, 1);
-                if (taskData.length == 0) {
-                    taskWrap.setAttribute("isNull", "true");
-                }
-            }
+            console.log(item.parentElement);
+            item.parentElement.remove();
+
+            // 设置状态
+            task[index].type = "deleted";
+
+            // 显示剩余任务的个数
+            isDisplay();
         }
     });
 }
-itemDelete();
-
-*/

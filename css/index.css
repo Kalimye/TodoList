@@ -117,10 +117,3 @@
     height: 50px;
     cursor: pointer;
 }
-
-.task-list[isNull="true"] .list-blank{
-    display: block;
-}
-.task-list[isNull="false"] .list-blank{
-    display: none;
-}

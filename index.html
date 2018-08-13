@@ -12,10 +12,25 @@
 
 <body>
 	<div class="wrap">
-		<div class="task-content">
-			<h1 class="title">TodoList</h1>
-			<ul class="task-list">
-			</ul>
+		<div class="task-content-wrap">
+			<!-- 显示当前任务 -->
+			<div class="task-content task-Now" isNone="false">
+				<h1 class="title">当前任务</h1>
+				<ul class="task-list">
+				</ul>
+			</div>
+			<!-- 显示所有任务 -->
+			<div class="task-content task-All" isNone="true">
+				<h1 class="title">所有任务</h1>
+				<ul class="task-list">
+				</ul>
+			</div>
+			<!-- 显示已经完成任务 -->
+			<div class="task-content task-Complete" isNone="true">
+				<h1 class="title">已完成任务</h1>
+				<ul class="task-list">
+				</ul>
+			</div>
 			<p class="list-blank">还没有添加过任务…</p>
 		</div>
 		<!--Todo内容 -->
@@ -28,13 +43,13 @@
 		<div class="function-box">
 			<ul>
 				<li>
-					<a href="javascript:;" class="addTask">添加</a>
+					<a href="javascript:;" class="addTask active">添加</a>
 				</li>
 				<li>
-					<a href="javascript:;">显示所有</a>
+					<a href="javascript:;" class="displayAll">显示所有</a>
 				</li>
 				<li>
-					<a href="javascript:;">显示已完成</a>
+					<a href="javascript:;" class="displayCom">显示已完成</a>
 				</li>
 			</ul>
 		</div>

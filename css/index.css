@@ -18,6 +18,22 @@
 .task-content{
     padding: 20px;
 }
+.task-Now{
+    display: block;
+}
+.task-All{
+    display: none;
+}
+.task-Complete{
+    display: none;
+}
+
+.task-content[isNone=true]{
+    display: none;
+}
+.task-content[isNone=false]{
+    display: block;
+}
 .task-list{
     height: 400px;
     overflow-y: auto;
@@ -36,9 +52,6 @@
 }
 /* 状态按钮 */
 
-
-
-
 /* 功能按钮 */
 .function-box ul{
     display: inline-block;
@@ -54,8 +67,10 @@
 .function-box ul li a{
     display: block;
 }
-
-
+.function-box ul li a.active{
+    color: #fff;
+    background: pink;
+}
 /* 添加任务弹出 */
 .task-edit-box{
     display: none;
@@ -116,4 +131,16 @@
     width:50px;
     height: 50px;
     cursor: pointer;
+}
+.complete-item{
+    position: absolute;
+    right: 60px;
+    top: 0;
+    display: block;
+    width:50px;
+    height: 50px;
+    cursor: pointer;
+}
+.task-length{
+    color: red;
 }
